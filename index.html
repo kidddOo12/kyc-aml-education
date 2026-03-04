@@ -1,839 +1,815 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AML with Vikas · KYC/AML Career Hub</title>
-  <!-- Google Font & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f9fafc;
-      color: #1e293b;
-      line-height: 1.5;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    /* branding header */
-    .brand-bar {
-      background: #0f172a;
-      color: white;
-      padding: 12px 0;
-      border-bottom: 3px solid #2563eb;
-    }
-    .brand-bar .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-    .logo i {
-      color: #2563eb;
-      margin-right: 8px;
-    }
-    .logo span {
-      color: #2563eb;
-    }
-    .tagline {
-      font-weight: 400;
-      color: #94a3b8;
-    }
-    .btn {
-      display: inline-block;
-      background: #2563eb;
-      color: white;
-      font-weight: 600;
-      padding: 12px 28px;
-      border-radius: 40px;
-      text-decoration: none;
-      transition: 0.2s;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      box-shadow: 0 4px 6px rgba(37,99,235,0.2);
-    }
-    .btn:hover {
-      background: #1d4ed8;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 12px rgba(37,99,235,0.3);
-    }
-    .btn-outline {
-      background: transparent;
-      border: 2px solid #2563eb;
-      color: #2563eb;
-      box-shadow: none;
-    }
-    .btn-outline:hover {
-      background: #2563eb;
-      color: white;
-    }
-    /* hero */
-    .hero {
-      text-align: center;
-      padding: 60px 0 40px;
-      background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
-    }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-    .hero .typed-container {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #2563eb;
-      min-height: 3.5rem;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #475569;
-      margin: 24px 0 32px;
-    }
-    /* stats grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 24px;
-      margin: 60px 0;
-      text-align: center;
-    }
-    .stat-card {
-      background: white;
-      padding: 24px 12px;
-      border-radius: 28px;
-      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-      transition: 0.2s;
-    }
-    .stat-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
-    }
-    .stat-number {
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: #0f172a;
-      line-height: 1.2;
-    }
-    .stat-label {
-      color: #475569;
-      font-weight: 500;
-    }
-    .stat-note {
-      font-size: 0.9rem;
-      color: #64748b;
-      margin-top: 8px;
-    }
-    /* section titles */
-    .section-title {
-      font-size: 2.2rem;
-      font-weight: 700;
-      text-align: center;
-      margin: 60px 0 30px;
-    }
-    .section-sub {
-      text-align: center;
-      color: #2563eb;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    /* cards grid (why) */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin: 40px 0;
-    }
-    .card {
-      background: white;
-      border-radius: 32px;
-      padding: 28px 20px;
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
-      transition: 0.2s;
-      cursor: pointer;
-      border: 1px solid #e9eef2;
-    }
-    .card:hover {
-      box-shadow: 0 30px 40px -20px rgba(0,0,0,0.15);
-    }
-    .card i {
-      font-size: 2.5rem;
-      color: #2563eb;
-      margin-bottom: 16px;
-    }
-    .card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 12px;
-    }
-    .card p {
-      color: #475569;
-    }
-    .card .more-text {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, margin 0.2s;
-      color: #334155;
-      margin-top: 0;
-    }
-    .card.active .more-text {
-      max-height: 150px;
-      margin-top: 16px;
-    }
-    /* steps */
-    .steps-container {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      margin: 50px 0;
-      flex-wrap: wrap;
-    }
-    .step {
-      flex: 1 1 200px;
-      background: white;
-      border-radius: 30px;
-      padding: 24px;
-      text-align: center;
-      box-shadow: 0 10px 25px -8px rgba(0,0,0,0.06);
-      border: 1px solid #e2e8f0;
-    }
-    .step-number {
-      background: #2563eb;
-      color: white;
-      width: 48px;
-      height: 48px;
-      font-size: 1.5rem;
-      font-weight: 700;
-      border-radius: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-    }
-    /* roadmap accordion */
-    .accordion {
-      background: white;
-      border-radius: 32px;
-      padding: 20px;
-      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
-      margin: 40px 0;
-    }
-    .accordion-item {
-      border-bottom: 1px solid #e2e8f0;
-      padding: 12px 0;
-    }
-    .accordion-item:last-child {
-      border-bottom: none;
-    }
-    .accordion-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      font-size: 1.3rem;
-      cursor: pointer;
-      padding: 10px 0;
-    }
-    .accordion-title i {
-      transition: transform 0.2s;
-      color: #2563eb;
-    }
-    .accordion-item.active .accordion-title i {
-      transform: rotate(45deg);
-    }
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      padding-left: 10px;
-    }
-    .accordion-item.active .accordion-content {
-      max-height: 200px;
-      padding-bottom: 16px;
-    }
-    .accordion-content ul {
-      list-style: none;
-    }
-    .accordion-content li {
-      margin: 10px 0;
-      color: #334155;
-    }
-    .accordion-content i {
-      color: #2563eb;
-      width: 24px;
-    }
-    /* career guide table */
-    .career-table {
-      background: white;
-      border-radius: 40px;
-      padding: 30px;
-      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.1);
-      margin: 40px 0;
-      overflow-x: auto;
-    }
-    .career-table table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-    .career-table th {
-      background: #f1f5f9;
-      padding: 16px 12px;
-      font-size: 1.1rem;
-      color: #0f172a;
-    }
-    .career-table td {
-      padding: 16px 12px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .career-table tr:last-child td {
-      border-bottom: none;
-    }
-    .career-table i {
-      color: #2563eb;
-      width: 24px;
-    }
-    .badge {
-      background: #dbeafe;
-      color: #1e40af;
-      padding: 4px 12px;
-      border-radius: 40px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: inline-block;
-    }
-    /* testimonial carousel */
-    .carousel {
-      background: white;
-      border-radius: 40px;
-      padding: 40px;
-      box-shadow: 0 20px 40px -20px rgba(0,0,0,0.2);
-      margin: 50px 0;
-    }
-    .carousel-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 200px;
-    }
-    .testimonial {
-      text-align: center;
-      max-width: 600px;
-      display: none;
-    }
-    .testimonial.active {
-      display: block;
-    }
-    .testimonial h4 {
-      font-size: 1.4rem;
-      margin: 12px 0 4px;
-    }
-    .testimonial .role {
-      color: #2563eb;
-      font-weight: 500;
-    }
-    .testimonial .quote {
-      font-style: italic;
-      color: #334155;
-      margin: 16px 0;
-    }
-    .stars {
-      color: #fbbf24;
-      font-size: 1.3rem;
-    }
-    .carousel-controls {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 24px;
-    }
-    .carousel-btn {
-      background: #e9eef2;
-      border: none;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .carousel-btn:hover {
-      background: #2563eb;
-      color: white;
-    }
-    /* FAQ accordion */
-    .faq-accordion {
-      background: white;
-      border-radius: 32px;
-      padding: 20px;
-      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
-      margin: 30px 0;
-    }
-    .faq-item {
-      border-bottom: 1px solid #e2e8f0;
-      padding: 12px 0;
-    }
-    .faq-question {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      cursor: pointer;
-      padding: 10px 0;
-    }
-    .faq-question i {
-      transition: transform 0.2s;
-    }
-    .faq-item.active .faq-question i {
-      transform: rotate(45deg);
-    }
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s;
-      color: #475569;
-    }
-    .faq-item.active .faq-answer {
-      max-height: 200px;
-      padding-bottom: 16px;
-    }
-    /* download area */
-    .download-area {
-      background: #0f172a;
-      color: white;
-      border-radius: 60px;
-      padding: 60px 40px;
-      text-align: center;
-      margin: 70px 0;
-    }
-    .download-area h2 {
-      font-size: 2.2rem;
-      margin-bottom: 16px;
-    }
-    .download-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-    .download-btn {
-      background: white;
-      color: #0f172a;
-      padding: 16px 36px;
-      border-radius: 50px;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      transition: 0.2s;
-    }
-    .download-btn:hover {
-      background: #e2e8f0;
-      transform: scale(1.02);
-    }
-    .download-btn i {
-      color: #2563eb;
-      font-size: 1.4rem;
-    }
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #64748b;
-    }
-    @media (max-width: 700px) {
-      .hero h1 { font-size: 2.2rem; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .steps-container { flex-direction: column; }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KYC/AML Career Hub — AML with Vikas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #070b16;
+    --bg2: #0c1120;
+    --surface: #131b30;
+    --surface2: #1a2440;
+    --gold: #f0b429;
+    --gold2: #ffd166;
+    --teal: #22d3b8;
+    --teal2: #06b6d4;
+    --text: #e8edf5;
+    --muted: #6b7fa0;
+    --border: rgba(255,255,255,0.06);
+    --border2: rgba(255,255,255,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* GRAIN */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(7,11,22,0.88);
+    backdrop-filter: blur(20px) saturate(1.8);
+    border-bottom: 1px solid var(--border);
+    padding: 0 6%;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700; color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-brand-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 8px var(--teal);
+  }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a {
+    font-size: 0.82rem; color: var(--muted);
+    text-decoration: none; font-weight: 500;
+    transition: color 0.2s; letter-spacing: 0.01em;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--gold) !important; color: #070b16 !important;
+    font-weight: 700 !important; padding: 9px 22px !important;
+    border-radius: 7px; font-size: 0.82rem !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+  .nav-cta:hover { transform: translateY(-1px) !important; box-shadow: 0 6px 18px rgba(240,180,41,0.3) !important; color: #070b16 !important; }
+  @media (max-width: 700px) { .nav-links { gap: 16px; } .nav-links a:not(.nav-cta):not(:last-child) { display: none; } }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 6% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ambient glows */
+  .hero::before {
+    content: '';
+    position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 500px;
+    background: radial-gradient(ellipse at 50% 40%, rgba(240,180,41,0.07) 0%, rgba(34,211,184,0.04) 40%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+  }
+
+  /* Grid lines bg */
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent);
+    pointer-events: none;
+  }
+
+  .hero-inner { position: relative; z-index: 1; max-width: 860px; }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(240,180,41,0.08);
+    border: 1px solid rgba(240,180,41,0.2);
+    border-radius: 100px;
+    padding: 7px 18px; margin-bottom: 30px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+  }
+  .hero-eyebrow span {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 8vw, 5.8rem);
+    font-weight: 900; line-height: 1.06;
+    letter-spacing: -0.03em; margin-bottom: 24px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  h1 .gold { color: var(--gold); }
+  h1 .italic { font-style: italic; color: var(--teal); }
+  h1 .outline {
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.25);
+    color: transparent;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.18rem);
+    color: var(--muted); max-width: 540px; margin: 0 auto 40px;
+    animation: fadeUp 0.7s 0.2s ease both;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 14px;
+    margin-bottom: 60px;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .btn-hero-primary {
+    background: var(--gold); color: #070b16;
+    font-weight: 700; font-size: 0.95rem;
+    padding: 15px 36px; border-radius: 10px;
+    text-decoration: none; display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(240,180,41,0.2);
+  }
+  .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(240,180,41,0.35); }
+  .btn-hero-secondary {
+    background: var(--surface); color: var(--text);
+    font-weight: 600; font-size: 0.9rem;
+    padding: 14px 32px; border-radius: 10px;
+    border: 1px solid var(--border2);
+    text-decoration: none; display: inline-block;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-hero-secondary:hover { border-color: var(--teal); background: var(--surface2); }
+
+  /* STATS ROW */
+  .stats-row {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+    animation: fadeUp 0.7s 0.4s ease both;
+    border: 1px solid var(--border2);
+    border-radius: 14px; overflow: hidden;
+    max-width: 700px; margin: 0 auto;
+    background: var(--surface);
+  }
+  .stat {
+    flex: 1; min-width: 140px;
+    padding: 20px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+    position: relative;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900;
+    color: var(--gold); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); line-height: 1.35; }
+
+  /* ── TOOLS ── */
+  .tools-section {
+    padding: 100px 6%;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+  }
+  .section-header { margin-bottom: 56px; }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal);
+    display: block; margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700; line-height: 1.18; margin-bottom: 12px;
+  }
+  .section-desc { color: var(--muted); max-width: 480px; font-size: 1rem; }
+  .divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--teal)); border-radius: 2px; margin: 16px 0 0; }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    max-width: 1100px;
+  }
+  .tool-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .tool-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .tool-card.gold-accent::before { background: linear-gradient(90deg, var(--gold), var(--gold2)); }
+  .tool-card.teal-accent::before { background: linear-gradient(90deg, var(--teal), var(--teal2)); }
+  .tool-card.purple-accent::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+  .tool-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.12); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .tool-card:hover::before { opacity: 1; }
+
+  .tool-icon-wrap {
+    width: 52px; height: 52px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .tool-icon-wrap.gold-bg { background: rgba(240,180,41,0.1); border-color: rgba(240,180,41,0.2); }
+  .tool-icon-wrap.teal-bg { background: rgba(34,211,184,0.08); border-color: rgba(34,211,184,0.2); }
+  .tool-icon-wrap.purple-bg { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.2); }
+  .tool-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 10px; color: var(--muted);
+  }
+  .tool-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700; margin-bottom: 10px;
+  }
+  .tool-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; flex: 1; margin-bottom: 22px; }
+  .tool-link {
+    font-size: 0.83rem; font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+    transition: gap 0.2s;
+  }
+  .tool-card:hover .tool-link { gap: 10px; }
+  .tool-card.gold-accent .tool-link { color: var(--gold); }
+  .tool-card.teal-accent .tool-link { color: var(--teal); }
+  .tool-card.purple-accent .tool-link { color: #a78bfa; }
+
+  /* ── WHY SECTION ── */
+  .why-section { padding: 100px 6%; }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+    max-width: 1100px;
+  }
+  @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .why-left h2 { margin-bottom: 16px; }
+  .why-left p { color: var(--muted); margin-bottom: 32px; }
+  .why-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .why-item {
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .why-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(240,180,41,0.08);
+    border: 1px solid rgba(240,180,41,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.95rem;
+  }
+  .why-text strong { display: block; font-size: 0.92rem; font-weight: 600; margin-bottom: 2px; }
+  .why-text span { font-size: 0.83rem; color: var(--muted); }
+
+  .why-right {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 20px;
+    text-align: center;
+  }
+  .metric-card:nth-child(1) { grid-column: span 2; }
+  .metric-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem; font-weight: 900;
+    color: var(--gold); line-height: 1; margin-bottom: 6px;
+  }
+  .metric-label { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+
+  /* ── JOURNEY STEPS ── */
+  .journey-section { padding: 100px 6%; background: var(--bg2); }
+  .steps-row {
+    display: flex; flex-wrap: wrap; gap: 0;
+    max-width: 960px;
+    position: relative;
+  }
+  .steps-row::before {
+    content: '';
+    position: absolute; top: 38px; left: 56px; right: 56px; height: 1px;
+    background: linear-gradient(90deg, var(--gold), var(--teal));
+    opacity: 0.25;
+  }
+  @media (max-width: 700px) { .steps-row::before { display: none; } }
+  .step {
+    flex: 1; min-width: 180px;
+    padding: 0 20px 0;
+    text-align: center;
+  }
+  .step-circle {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--surface); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 900; color: var(--gold);
+    position: relative; z-index: 1;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .step:hover .step-circle {
+    background: rgba(240,180,41,0.1);
+    border-color: rgba(240,180,41,0.4);
+  }
+  .step-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+  .step-desc { font-size: 0.8rem; color: var(--muted); }
+
+  /* ── MODULES ── */
+  .modules-section { padding: 100px 6%; }
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px; max-width: 980px;
+  }
+  @media (max-width: 768px) { .modules-grid { grid-template-columns: 1fr; } }
+  .module-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .module-card:hover { transform: translateY(-3px); border-color: rgba(240,180,41,0.2); }
+  .module-num {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px;
+  }
+  .module-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 700; margin-bottom: 16px;
+    color: var(--gold);
+  }
+  .module-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .module-list li {
+    font-size: 0.85rem; color: var(--muted);
+    display: flex; gap: 9px; align-items: flex-start;
+  }
+  .module-list li::before {
+    content: '·'; color: var(--teal); flex-shrink: 0;
+    font-size: 1.1rem; line-height: 1.4;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { padding: 100px 6%; background: var(--bg2); }
+  .testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 860px; }
+  @media (max-width: 600px) { .testi-grid { grid-template-columns: 1fr; } }
+  .testi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px;
+    position: relative;
+  }
+  .testi-card::before {
+    content: '"';
+    position: absolute; top: 16px; right: 22px;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; color: rgba(240,180,41,0.1);
+    line-height: 1;
+  }
+  .stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 12px; letter-spacing: 2px; }
+  .testi-text { font-size: 0.92rem; color: var(--muted); line-height: 1.7; margin-bottom: 18px; font-style: italic; }
+  .testi-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
+  .testi-role { font-size: 0.78rem; color: var(--teal); }
+
+  /* ── FAQ ── */
+  .faq-section { padding: 100px 6%; }
+  .faq-list { max-width: 700px; display: flex; flex-direction: column; gap: 2px; }
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .faq-q {
+    padding: 18px 22px; font-weight: 600; font-size: 0.95rem;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .faq-q:hover { background: var(--surface2); }
+  .faq-arrow { color: var(--gold); font-size: 1rem; transition: transform 0.25s; flex-shrink: 0; }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.25s;
+    font-size: 0.88rem; color: var(--muted); line-height: 1.7;
+    padding: 0 22px;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 22px 18px; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 100px 6%;
+    background: var(--bg2);
+  }
+  .cta-box {
+    background: linear-gradient(130deg, #0f1e42 0%, #0d1830 50%, #091628 100%);
+    border: 1px solid rgba(240,180,41,0.15);
+    border-radius: 24px;
+    padding: 70px 60px;
+    text-align: center;
+    position: relative; overflow: hidden;
+    max-width: 900px;
+  }
+  .cta-box::before {
+    content: '';
+    position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(240,180,41,0.07), transparent 65%);
+    pointer-events: none;
+  }
+  .cta-box::after {
+    content: '';
+    position: absolute; bottom: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(34,211,184,0.07), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-box h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 14px; }
+  .cta-box p { color: var(--muted); max-width: 500px; margin: 0 auto 38px; }
+  .cta-btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+  .btn-cta {
+    background: var(--gold); color: #070b16; font-weight: 700;
+    font-size: 0.95rem; padding: 15px 36px; border-radius: 10px;
+    text-decoration: none; display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(240,180,41,0.3); }
+  .btn-cta-outline {
+    background: transparent; color: var(--text); font-weight: 600;
+    font-size: 0.9rem; padding: 14px 32px; border-radius: 10px;
+    border: 1px solid var(--border2);
+    text-decoration: none; display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-cta-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 6%;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 14px;
+  }
+  .footer-brand { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--gold); font-size: 1rem; }
+  footer p { font-size: 0.78rem; color: var(--muted); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
 </head>
 <body>
-  <!-- Brand bar: AML with Vikas -->
-  <div class="brand-bar">
-    <div class="container">
-      <div class="logo">
-        <i class="fas fa-shield-halved"></i> AML<span>withVikas</span>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-brand-dot"></div>
+    AML with Vikas
+  </a>
+  <div class="nav-links">
+    <a href="#why">Why KYC/AML</a>
+    <a href="#journey">Journey</a>
+    <a href="#tools">Resources</a>
+    <a href="chatbot.html">Ask AI</a>
+    <a href="#downloads" class="nav-cta">Get Free Guide</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      <span>#AMLwithVikas · KYC/AML Career Hub</span>
+    </div>
+    <h1>
+      Kickstart Your<br/>
+      <span class="gold">KYC/AML</span> Career<br/>
+      <span class="italic">with Vikas</span>
+    </h1>
+    <p class="hero-sub">High-demand, global compliance roles. No coding required. Open to graduates from <em style="color:var(--gold)">any stream</em>.</p>
+    <div class="hero-actions">
+      <a href="#downloads" class="btn-hero-primary">⬇ Get Free Career Guide</a>
+      <a href="quiz.html" class="btn-hero-secondary">🎯 Take Career Quiz</a>
+      <a href="chatbot.html" class="btn-hero-secondary">💬 Ask Vikas AI</a>
+    </div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num">12K+</div>
+        <div class="stat-label">Open positions<br/>entry level + intern</div>
       </div>
-      <div class="tagline">
-        <i class="fas fa-graduation-cap"></i> Your trusted mentor in compliance
+      <div class="stat">
+        <div class="stat-num">$65k</div>
+        <div class="stat-label">Average entry salary<br/>US / EU</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">+40%</div>
+        <div class="stat-label">Job growth<br/>by 2027</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Certifications<br/>CAMS, ICA & more</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Hero with typed animation & brand integration -->
-  <section class="hero">
-    <div class="container">
-      <h1>Kickstart Your Career in KYC/AML <br>with <span style="color:#2563eb;">Vikas</span></h1>
-      <div class="typed-container">
-        <span class="typed"></span>
-      </div>
-      <p>High‑demand, global compliance roles — no coding required.<br>Open to graduates from any stream. <strong>#AMLwithVikas</strong></p>
-      <a href="#downloads" class="btn"><i class="fas fa-download"></i> Get Free Career Guide</a>
+<!-- TOOLS / RESOURCES -->
+<section class="tools-section" id="tools">
+  <div class="section-header fade-up">
+    <span class="section-label">Your Resources</span>
+    <h2>Everything You Need<br/>to Land Your First Job</h2>
+    <div class="divider"></div>
+    <p class="section-desc" style="margin-top:14px;">Three powerful tools built by Vikas — use them together for the fastest path to employment.</p>
+  </div>
+  <div class="tools-grid fade-up">
+    <a href="career-guide-roadmap.html" class="tool-card gold-accent">
+      <div class="tool-icon-wrap gold-bg">🗺️</div>
+      <div class="tool-tag">Step-by-step guide</div>
+      <div class="tool-title">Career Guide & Roadmap</div>
+      <p class="tool-desc">A full career progression guide — roles, certifications, salary benchmarks, a 12-month action plan, and a skills matrix. Everything in one place.</p>
+      <div class="tool-link">Explore Roadmap →</div>
+    </a>
+    <a href="quiz.html" class="tool-card teal-accent">
+      <div class="tool-icon-wrap teal-bg">🎯</div>
+      <div class="tool-tag">10 questions · 3 minutes</div>
+      <div class="tool-title">Career Self-Assessment Quiz</div>
+      <p class="tool-desc">Not sure which role fits you? Answer 10 questions and get a personalised recommendation — including which certifications to start with.</p>
+      <div class="tool-link">Take the Quiz →</div>
+    </a>
+    <a href="chatbot.html" class="tool-card purple-accent">
+      <div class="tool-icon-wrap purple-bg">🤖</div>
+      <div class="tool-tag">AI-powered · Always on</div>
+      <div class="tool-title">Ask Vikas AI</div>
+      <p class="tool-desc">Get instant answers to your KYC/AML questions — CDD/EDD explained, CAMS study tips, interview prep, salary negotiation, and more.</p>
+      <div class="tool-link">Chat Now →</div>
+    </a>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-section" id="why">
+  <div class="why-grid">
+    <div class="why-left fade-up">
+      <span class="section-label">Why KYC/AML</span>
+      <h2>It's Not Just<br/>for B.Com Graduates</h2>
+      <p>Finance, law, arts, engineering — compliance welcomes analytical thinkers from every background. Skills beat degree.</p>
+      <ul class="why-list">
+        <li class="why-item">
+          <div class="why-icon">🌍</div>
+          <div class="why-text"><strong>Global opportunities</strong><span>Same qualifications work in London, Singapore, Dubai, or Mumbai.</span></div>
+        </li>
+        <li class="why-item">
+          <div class="why-icon">⚡</div>
+          <div class="why-text"><strong>Quick to learn</strong><span>3–6 month certificate + internship path. Study while working part-time.</span></div>
+        </li>
+        <li class="why-item">
+          <div class="why-icon">🛡️</div>
+          <div class="why-text"><strong>Recession-resistant</strong><span>Compliance is mandatory — not optional. Demand never stops.</span></div>
+        </li>
+        <li class="why-item">
+          <div class="why-icon">🚀</div>
+          <div class="why-text"><strong>Fast promotions</strong><span>Analyst to manager in just 3–4 years with the right certifications.</span></div>
+        </li>
+        <li class="why-item">
+          <div class="why-icon">🏠</div>
+          <div class="why-text"><strong>Remote/hybrid options</strong><span>KYC document verification and screening are often fully remote.</span></div>
+        </li>
+      </ul>
     </div>
-  </section>
-
-  <!-- Stats with count-up -->
-  <div class="container">
-    <div class="stats-grid" id="stats-section">
-      <div class="stat-card">
-        <div class="stat-number" id="stat1" data-target="12">12K+</div>
-        <div class="stat-label">open positions</div>
-        <div class="stat-note">entry level + internship</div>
+    <div class="why-right fade-up">
+      <div class="metric-card">
+        <div class="metric-num">30%</div>
+        <div class="metric-label">Increase in entry-level compliance hiring<br/>at top banks & fintechs in 2024</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-number" id="stat2" data-target="65">$65k</div>
-        <div class="stat-label">average entry salary (US/EU)</div>
-        <div class="stat-note">competitive from day one</div>
+      <div class="metric-card">
+        <div class="metric-num">3–4</div>
+        <div class="metric-label">Years analyst<br/>to manager</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-number" id="stat3" data-target="40">+40%</div>
-        <div class="stat-label">job growth by 2027</div>
-        <div class="stat-note">fintech + traditional banking</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number" id="stat4" data-target="15">15+</div>
-        <div class="stat-label">certifications available</div>
-        <div class="stat-note">CAMS, ICA, and more</div>
+      <div class="metric-card">
+        <div class="metric-num">6–8</div>
+        <div class="metric-label">Months to your<br/>first job offer</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Why KYC/AML (clickable cards) -->
-  <div class="container">
-    <div class="section-sub">why it matters</div>
-    <h2 class="section-title">Why KYC/AML? (it's not just for B.Com)</h2>
-    <p style="text-align: center; margin-bottom: 30px;">Ideal for graduates in finance, law, business, or even arts — skills over background</p>
-    <div class="cards-grid">
-      <div class="card">
-        <i class="fas fa-university"></i>
-        <h3>Banking & fintech demand</h3>
-        <p>Every financial institution needs compliance experts</p>
-        <div class="more-text">Top banks and fintechs hired 30% more entry-level compliance officers in 2024.</div>
-      </div>
-      <div class="card">
-        <i class="fas fa-globe"></i>
-        <h3>Global opportunities</h3>
-        <p>Work in London, Singapore, Dubai — same standards</p>
-        <div class="more-text">KYC/AML qualifications are recognized worldwide, making relocation seamless.</div>
-      </div>
-      <div class="card">
-        <i class="fas fa-rocket"></i>
-        <h3>Quick to learn</h3>
-        <p>3‑6 month certificate + internship path</p>
-        <div class="more-text">Many online certificates can be completed while working part-time.</div>
-      </div>
-      <div class="card">
-        <i class="fas fa-shield-alt"></i>
-        <h3>Recession‑resistant</h3>
-        <p>Compliance is mandatory, not optional</p>
-        <div class="more-text">Even during downturns, regulations require KYC/AML staff.</div>
-      </div>
-      <div class="card">
-        <i class="fas fa-chart-line"></i>
-        <h3>Fast promotions</h3>
-        <p>From analyst to manager in 3‑4 years</p>
-        <div class="more-text">Clear career progression with regular salary bumps.</div>
-      </div>
-      <div class="card">
-        <i class="fas fa-home"></i>
-        <h3>Remote/hybrid options</h3>
-        <p>Many KYC operations are now work‑from‑home</p>
-        <div class="more-text">Document verification and screening are often fully remote roles.</div>
-      </div>
+<!-- JOURNEY -->
+<section class="journey-section" id="journey">
+  <div class="section-header fade-up">
+    <span class="section-label">The Path</span>
+    <h2>Your 4-Step Journey</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="steps-row fade-up">
+    <div class="step">
+      <div class="step-circle">1</div>
+      <div class="step-title">Learn Fundamentals</div>
+      <div class="step-desc">KYC norms, CDD/EDD, PEP & sanctions screening</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <div class="step-title">Get Certified</div>
+      <div class="step-desc">CAMS, ICA certificates — study online at your pace</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <div class="step-title">Hands-On Practice</div>
+      <div class="step-desc">Real case studies, simulated tools, SAR writing</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">4</div>
+      <div class="step-title">Apply & Grow</div>
+      <div class="step-desc">Resume support, interview prep, and your first offer</div>
     </div>
   </div>
+</section>
 
-  <!-- 4-step journey -->
-  <div class="container">
-    <h2 class="section-title">Your 4‑step journey</h2>
-    <div class="steps-container">
-      <div class="step"><span class="step-number">1</span><h4>Learn fundamentals</h4><p>KYC norms, CDD/EDD, screening</p></div>
-      <div class="step"><span class="step-number">2</span><h4>Get certified</h4><p>CAMS, AML certificates (online)</p></div>
-      <div class="step"><span class="step-number">3</span><h4>Hands‑on practice</h4><p>Case studies & simulated tools</p></div>
-      <div class="step"><span class="step-number">4</span><h4>Apply & grow</h4><p>Resume support + interview prep</p></div>
+<!-- MODULES -->
+<section class="modules-section" id="modules">
+  <div class="section-header fade-up">
+    <span class="section-label">Learning Roadmap</span>
+    <h2>📘 Structured Learning<br/>for All Graduates</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="modules-grid fade-up">
+    <div class="module-card">
+      <div class="module-num">Module 01</div>
+      <div class="module-title">Foundation</div>
+      <ul class="module-list">
+        <li>KYC regulations — global overview</li>
+        <li>Customer Due Diligence (CDD/EDD)</li>
+        <li>Sanctions & PEP screening</li>
+        <li>Data privacy essentials</li>
+      </ul>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Module 02</div>
+      <div class="module-title">Screening & Monitoring</div>
+      <ul class="module-list">
+        <li>Transaction monitoring</li>
+        <li>Suspicious Activity Reports (SAR)</li>
+        <li>Case management tools</li>
+        <li>AML compliance frameworks</li>
+      </ul>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Module 03</div>
+      <div class="module-title">Certification & Beyond</div>
+      <ul class="module-list">
+        <li>CAMS / ICA exam preparation</li>
+        <li>Practical labs (simulated)</li>
+        <li>Resume & interview workshop</li>
+        <li>Entry-level job search strategy</li>
+      </ul>
     </div>
   </div>
+</section>
 
-  <!-- Learning roadmap accordion + download -->
-  <div class="container">
-    <div class="section-sub">structured path</div>
-    <h2 class="section-title">📘 Learning roadmap (for all graduates)</h2>
-    <p style="text-align:center">From zero to job‑ready — a structured path</p>
-    <div class="accordion">
-      <div class="accordion-item active">
-        <div class="accordion-title"><span>Module 1 : Foundation</span> <i class="fas fa-plus-circle"></i></div>
-        <div class="accordion-content">
-          <ul>
-            <li><i class="fas fa-check-circle"></i> KYC regulations (global overview)</li>
-            <li><i class="fas fa-check-circle"></i> Customer Due Diligence (CDD/EDD)</li>
-            <li><i class="fas fa-check-circle"></i> Sanctions & PEP screening</li>
-            <li><i class="fas fa-check-circle"></i> Data privacy essentials</li>
-          </ul>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <div class="accordion-title"><span>Module 2 : Screening & monitoring</span> <i class="fas fa-plus-circle"></i></div>
-        <div class="accordion-content">
-          <ul>
-            <li><i class="fas fa-check-circle"></i> Transaction monitoring</li>
-            <li><i class="fas fa-check-circle"></i> Suspicious activity reports (SAR)</li>
-            <li><i class="fas fa-check-circle"></i> Case management tools</li>
-            <li><i class="fas fa-check-circle"></i> AML compliance frameworks</li>
-          </ul>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <div class="accordion-title"><span>Module 3 : Certification & beyond</span> <i class="fas fa-plus-circle"></i></div>
-        <div class="accordion-content">
-          <ul>
-            <li><i class="fas fa-check-circle"></i> CAMS / ICA exam prep</li>
-            <li><i class="fas fa-check-circle"></i> Practical labs (simulated)</li>
-            <li><i class="fas fa-check-circle"></i> Resume & interview workshop</li>
-            <li><i class="fas fa-check-circle"></i> Entry‑level job search</li>
-          </ul>
-        </div>
-      </div>
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header fade-up">
+    <span class="section-label">Success Stories</span>
+    <h2>Students Who Made It</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="testi-grid fade-up">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"I had zero finance background, but Vikas's roadmap made it easy. Landed a job in 5 months."</p>
+      <div class="testi-name">Anjali Patel</div>
+      <div class="testi-role">BA Political Science → AML Analyst, Barclays</div>
     </div>
-    <div style="text-align:center; margin: 30px 0">
-      <a href="Roadmap.pdf" download="KYC-AML-Roadmap.pdf" class="btn btn-outline"><i class="fas fa-download"></i> Download Full Roadmap PDF</a>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"The step-by-step process and real-world cases gave me confidence. Now I lead a team of 8."</p>
+      <div class="testi-name">Rahul Khanna</div>
+      <div class="testi-role">B.Com → KYC Team Lead, Paytm</div>
     </div>
   </div>
+</section>
 
-  <!-- NEW: Career Guide for Students (built-in table) -->
-  <div class="container">
-    <div class="section-sub">your future in compliance</div>
-    <h2 class="section-title">🎓 Career Guide for Students</h2>
-    <p style="text-align:center; max-width:700px; margin:0 auto 30px;">Everything you need to know to start and grow in KYC/AML — from entry-level to leadership.</p>
-    <div class="career-table">
-      <table>
-        <thead>
-          <tr><th>Role</th><th>Typical Salary (Entry)</th><th>Key Skills</th><th>Certifications</th><th>Growth Path</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><i class="fas fa-user-check"></i> KYC Analyst</td>
-            <td>$45k – $60k</td>
-            <td><span class="badge">CDD/EDD</span> <span class="badge">screening</span> <span class="badge">attention to detail</span></td>
-            <td>CAMS, ICA</td>
-            <td>Senior Analyst → Team Lead</td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-chart-bar"></i> AML Analyst</td>
-            <td>$50k – $65k</td>
-            <td><span class="badge">transaction monitoring</span> <span class="badge">SAR writing</span></td>
-            <td>CAMS, CGSS</td>
-            <td>AML Specialist → Manager</td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-gavel"></i> Compliance Associate</td>
-            <td>$48k – $62k</td>
-            <td><span class="badge">regulatory knowledge</span> <span class="badge">risk assessment</span></td>
-            <td>ICA Dip, CAMS</td>
-            <td>Compliance Officer → Head of Compliance</td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-search"></i> Screening Analyst</td>
-            <td>$42k – $55k</td>
-            <td><span class="badge">PEP/sanctions</span> <span class="badge">tools: WorldCheck</span></td>
-            <td>entry-level certs</td>
-            <td>KYC/AML Analyst</td>
-          </tr>
-        </tbody>
-      </table>
-      <p style="margin-top: 24px; font-style: italic; color: #475569;"><i class="fas fa-lightbulb"></i> Most students start as KYC or Screening analysts and move up in 2‑3 years. Vikas’s mentorship helps you skip the line.</p>
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-header fade-up">
+    <span class="section-label">FAQ</span>
+    <h2>Frequently Asked Questions</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="faq-list fade-up">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">I'm not a commerce graduate. Can I get into KYC/AML? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">Absolutely. KYC/AML values analytical thinking and attention to detail over your specific degree. Many successful professionals come from law, arts, or even engineering. Vikas himself has mentored students from every background into successful compliance careers.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How long does it take to get the first job? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">With focused learning (3–4 months for certification + 1–2 months for applications), most candidates secure an entry-level role within 6–8 months. Vikas's mentorship helps you skip common mistakes that slow people down.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Do I need coding or complex software skills? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">No coding required. You'll use basic office tools and specialized compliance software like WorldCheck and case management systems — all of which are taught on the job or in Vikas's program.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Which certification is best for beginners? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">Start with the ICA Certificate in KYC or the ACAMS Foundations Certificate. Then work towards CAMS — the global gold standard that opens doors at top banks and fintechs worldwide.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is remote work common in compliance? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">Yes! A large portion of KYC (document verification, data entry, screening) can be done remotely, and many companies now offer hybrid or fully remote options — especially fintechs and BPO firms.</div>
     </div>
   </div>
+</section>
 
-  <!-- Testimonial carousel (updated with Vikas references) -->
-  <div class="container">
-    <h2 class="section-title">Success stories</h2>
-    <div class="carousel">
-      <div class="carousel-inner">
-        <div class="testimonial active">
-          <span class="stars">★★★★★</span>
-          <h4>Anjali Patel</h4>
-          <div class="role">BA Political Science → AML Analyst at Barclays</div>
-          <p class="quote">“I had zero finance background, but Vikas’s roadmap made it easy. Landed a job in 5 months.”</p>
-        </div>
-        <div class="testimonial">
-          <span class="stars">★★★★★</span>
-          <h4>Rahul Khanna</h4>
-          <div class="role">B.Com → KYC Team Lead, Paytm</div>
-          <p class="quote">“The step‑by‑step process and real‑world cases gave me confidence. Now I lead a team of 8.”</p>
-        </div>
-      </div>
-      <div class="carousel-controls">
-        <button class="carousel-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-        <button class="carousel-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-      </div>
+<!-- CTA / DOWNLOADS -->
+<section class="cta-section" id="downloads">
+  <div class="cta-box fade-up">
+    <h2>Ready to Start Your<br/><span style="color:var(--gold)">KYC/AML Journey</span>?</h2>
+    <p>Get the free step-by-step career guide + the full learning roadmap. Mentored by Vikas, built for you.</p>
+    <div class="cta-btns">
+      <a href="guide.pdf" class="btn-cta">⬇ Download Career Guide (PDF)</a>
+      <a href="Roadmap.pdf" class="btn-cta-outline">Download Learning Roadmap</a>
     </div>
   </div>
+</section>
 
-  <!-- FAQ accordion -->
-  <div class="container">
-    <h2 class="section-title">Frequently asked questions</h2>
-    <div class="faq-accordion">
-      <div class="faq-item">
-        <div class="faq-question">I’m not a commerce graduate. Can I still get into KYC/AML? <i class="fas fa-plus-circle"></i></div>
-        <div class="faq-answer">Absolutely. KYC/AML values analytical thinking and attention to detail over your specific degree. Many successful professionals come from law, arts, or even engineering.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">How long does it take to get the first job? <i class="fas fa-plus-circle"></i></div>
-        <div class="faq-answer">With focused learning (3‑4 months for certification + 1‑2 months for applications), most candidates secure an entry‑level role within 6‑8 months.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Do I need to know coding or complex software? <i class="fas fa-plus-circle"></i></div>
-        <div class="faq-answer">No coding required. You’ll use basic office tools and specialized compliance software that’s taught on the job.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Which certification is best for beginners? <i class="fas fa-plus-circle"></i></div>
-        <div class="faq-answer">CAMS (Certified Anti‑Money Laundering Specialist) is the global gold standard. Many start with入门‑level certificates from ICA or ACAMS.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Is remote work common in compliance? <i class="fas fa-plus-circle"></i></div>
-        <div class="faq-answer">Yes! A large part of KYC (document verification, data entry) can be done remotely, and many companies offer hybrid/remote options.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">What’s the average starting salary? <i class="fas fa-plus-circle"></i></div>
-        <div class="faq-answer">It varies by region, but entry‑level KYC analysts earn between $45k‑$65k in the US/UK, and competitive packages in Asia and ME.</div>
-      </div>
-    </div>
-  </div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">AML with Vikas</div>
+  <p>© 2025 AMLwithVikas — mentoring graduates into compliance</p>
+  <p style="color:var(--teal); font-size:0.78rem; font-family:'DM Mono',monospace;">#AMLwithVikas</p>
+</footer>
 
-  <!-- Download area (branded call to action) -->
-  <div class="container" id="downloads">
-    <div class="download-area">
-      <h2>Ready to start your KYC/AML journey with Vikas?</h2>
-      <p>Get the free step‑by‑step guide + curated resource list</p>
-      <div class="download-buttons">
-        <a href="guide.pdf" download="KYC-AML-Career-Guide.pdf" class="download-btn"><i class="fas fa-file-pdf"></i> Download Career Guide (PDF)</a>
-        <a href="Roadmap.pdf" download="KYC-AML-Roadmap.pdf" class="download-btn"><i class="fas fa-map"></i> Download Learning Roadmap</a>
-      </div>
-      <p style="margin-top: 30px; font-size: 0.9rem; opacity: 0.7;">We respect your privacy. Unsubscribe anytime.</p>
-    </div>
-  </div>
+<script>
+  // FAQ toggle
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
 
-  <footer>
-    <p>© 2025 AML with Vikas — mentoring graduates into compliance</p>
-  </footer>
-
-  <!-- typed js library -->
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  <script>
-    (function() {
-      // 1. Typed animation
-      new Typed('.typed', {
-        strings: ['Your Gateway to Global Compliance', 'For Arts, Law, Business & more', 'No Coding Required', 'High-Demand Roles'],
-        typeSpeed: 60,
-        backSpeed: 30,
-        loop: true
-      });
-
-      // 2. Count-up with Intersection Observer
-      const statNumbers = document.querySelectorAll('.stat-number');
-      let counted = false;
-      function countUp() {
-        if (counted) return;
-        counted = true;
-        statNumbers.forEach(el => {
-          const target = el.getAttribute('data-target');
-          let current = 0;
-          const inc = target <= 15 ? 1 : Math.ceil(target / 50);
-          const timer = setInterval(() => {
-            current += inc;
-            if (current >= target) {
-              clearInterval(timer);
-              el.innerText = el.id.includes('stat1') ? target + 'K+' : 
-                             el.id.includes('stat2') ? '$' + target + 'k' : 
-                             el.id.includes('stat3') ? '+' + target + '%' : 
-                             target + '+';
-            } else {
-              if (el.id === 'stat1') el.innerText = current + 'K+';
-              else if (el.id === 'stat2') el.innerText = '$' + current + 'k';
-              else if (el.id === 'stat3') el.innerText = '+' + current + '%';
-              else if (el.id === 'stat4') el.innerText = current + '+';
-            }
-          }, 30);
-        });
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            countUp();
-            observer.disconnect();
-          }
-        });
-      }, { threshold: 0.3 });
-      const statsSection = document.getElementById('stats-section');
-      if (statsSection) observer.observe(statsSection);
+    });
+  }, { threshold: 0.12 });
 
-      // 3. Clickable cards (Why section)
-      document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', function(e) {
-          e.stopPropagation();
-          this.classList.toggle('active');
-        });
-      });
-
-      // 4. Accordion for roadmap
-      document.querySelectorAll('.accordion-title').forEach(title => {
-        title.addEventListener('click', function() {
-          const parent = this.closest('.accordion-item');
-          parent.classList.toggle('active');
-        });
-      });
-
-      // 5. FAQ accordion
-      document.querySelectorAll('.faq-question').forEach(question => {
-        question.addEventListener('click', function() {
-          const parent = this.closest('.faq-item');
-          parent.classList.toggle('active');
-        });
-      });
-
-      // 6. Testimonial carousel
-      const testimonials = document.querySelectorAll('.testimonial');
-      let current = 0;
-      const prev = document.getElementById('prevBtn');
-      const next = document.getElementById('nextBtn');
-      function showSlide(index) {
-        testimonials.forEach((t, i) => {
-          t.classList.toggle('active', i === index);
-        });
-      }
-      if (prev && next) {
-        prev.addEventListener('click', () => {
-          current = (current - 1 + testimonials.length) % testimonials.length;
-          showSlide(current);
-        });
-        next.addEventListener('click', () => {
-          current = (current + 1) % testimonials.length;
-          showSlide(current);
-        });
-      }
-      setInterval(() => {
-        if (testimonials.length > 1) {
-          current = (current + 1) % testimonials.length;
-          showSlide(current);
-        }
-      }, 5000);
-    })();
-  </script>
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
