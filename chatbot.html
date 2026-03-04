@@ -7,445 +7,172 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --bg: #0a0e1a;
-    --bg2: #0f1626;
-    --surface: #151d35;
-    --surface2: #1c2640;
-    --gold: #f0b429;
-    --teal: #22d3b8;
-    --text: #e8edf5;
-    --muted: #7a8ba8;
-    --border: rgba(255,255,255,0.07);
+    --bg: #0a0e1a; --bg2: #0f1626; --surface: #151d35; --surface2: #1c2640;
+    --gold: #f0b429; --teal: #22d3b8; --text: #e8edf5; --muted: #7a8ba8; --border: rgba(255,255,255,0.07);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-  }
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 999; opacity: 0.3;
-  }
-
-  nav {
-    flex-shrink: 0;
-    background: rgba(10,14,26,0.95);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 5%;
-    display: flex; align-items: center; justify-content: space-between;
-    z-index: 10;
-  }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+  nav { flex-shrink: 0; background: rgba(10,14,26,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); padding: 14px 5%; display: flex; align-items: center; justify-content: space-between; z-index: 10; }
   .nav-brand { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: var(--gold); text-decoration: none; }
-  .nav-status {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 0.78rem; color: var(--muted);
-  }
-  .status-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--teal);
-    box-shadow: 0 0 6px var(--teal);
-    animation: pulse 2s infinite;
-  }
+  .nav-status { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 6px var(--teal); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
   .nav-back { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .nav-back:hover { color: var(--teal); }
-
-  /* CHAT AREA */
-  .chat-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    max-width: 760px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
-    overflow: hidden;
-  }
-
-  .messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 28px 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--surface2) transparent;
-  }
+  .chat-container { flex: 1; display: flex; flex-direction: column; max-width: 760px; width: 100%; margin: 0 auto; padding: 0 20px; overflow: hidden; }
+  .messages { flex: 1; overflow-y: auto; padding: 28px 0 20px; display: flex; flex-direction: column; gap: 18px; scrollbar-width: thin; scrollbar-color: var(--surface2) transparent; }
   .messages::-webkit-scrollbar { width: 4px; }
-  .messages::-webkit-scrollbar-track { background: transparent; }
   .messages::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 4px; }
-
-  /* WELCOME */
-  .welcome-card {
-    background: linear-gradient(135deg, #0f1e42, #152248);
-    border: 1px solid rgba(240,180,41,0.15);
-    border-radius: 16px;
-    padding: 28px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    animation: fadeUp 0.5s ease both;
-  }
-  .welcome-card::before {
-    content: '';
-    position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
-    width: 200px; height: 120px;
-    background: radial-gradient(ellipse, rgba(240,180,41,0.1), transparent 70%);
-  }
-  .ai-avatar {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold), var(--teal));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; margin: 0 auto 14px;
-    box-shadow: 0 0 24px rgba(240,180,41,0.3);
-  }
-  .welcome-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;
-  }
+  .welcome-card { background: linear-gradient(135deg, #0f1e42, #152248); border: 1px solid rgba(240,180,41,0.15); border-radius: 16px; padding: 28px; text-align: center; position: relative; overflow: hidden; animation: fadeUp 0.5s ease both; }
+  .ai-avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, rgba(240,180,41,0.3), rgba(34,211,184,0.3)); border: 1px solid rgba(240,180,41,0.3); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 14px; box-shadow: 0 0 24px rgba(240,180,41,0.2); }
+  .welcome-card h2 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
   .welcome-card h2 span { color: var(--gold); }
   .welcome-card p { color: var(--muted); font-size: 0.88rem; margin-bottom: 18px; line-height: 1.6; }
-  .suggestions {
-    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
-  }
-  .suggestion-chip {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 100px; padding: 7px 14px;
-    font-size: 0.78rem; color: var(--text);
-    cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s;
-    text-align: left;
-  }
+  .suggestions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .suggestion-chip { background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 7px 14px; font-size: 0.78rem; color: var(--text); cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s; font-family: 'DM Sans', sans-serif; }
   .suggestion-chip:hover { border-color: var(--gold); color: var(--gold); background: rgba(240,180,41,0.06); }
-
-  /* MESSAGES */
-  .msg {
-    display: flex;
-    gap: 12px;
-    animation: fadeUp 0.3s ease both;
-    max-width: 100%;
-  }
+  .msg { display: flex; gap: 12px; animation: fadeUp 0.3s ease both; }
   .msg.user { flex-direction: row-reverse; }
-  .msg-avatar {
-    width: 34px; height: 34px; border-radius: 50%;
-    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem; font-weight: 700;
-  }
-  .msg-avatar.ai {
-    background: linear-gradient(135deg, rgba(240,180,41,0.3), rgba(34,211,184,0.3));
-    border: 1px solid rgba(240,180,41,0.3);
-    color: var(--gold); font-size: 1rem;
-  }
-  .msg-avatar.user-av {
-    background: var(--surface2); border: 1px solid var(--border);
-    color: var(--muted); font-size: 0.75rem;
-  }
-  .msg-bubble {
-    max-width: 80%;
-    padding: 13px 18px;
-    border-radius: 14px;
-    font-size: 0.91rem;
-    line-height: 1.65;
-  }
-  .msg.ai .msg-bubble {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-top-left-radius: 4px;
-    color: var(--text);
-  }
-  .msg.user .msg-bubble {
-    background: rgba(240,180,41,0.12);
-    border: 1px solid rgba(240,180,41,0.2);
-    border-top-right-radius: 4px;
-    color: var(--text);
-  }
-  .msg-bubble strong { color: var(--gold); }
-  .msg-bubble em { color: var(--teal); font-style: normal; }
-  .msg-bubble ul { padding-left: 18px; margin: 8px 0; }
-  .msg-bubble li { margin-bottom: 4px; }
-  .msg-time { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); margin-top: 6px; }
+  .msg-avatar { width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .msg-avatar.ai { background: linear-gradient(135deg, rgba(240,180,41,0.25), rgba(34,211,184,0.25)); border: 1px solid rgba(240,180,41,0.3); font-size: 1.1rem; }
+  .msg-avatar.user-av { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 0.72rem; font-weight: 600; }
+  .msg-inner { max-width: 82%; }
+  .msg-bubble { padding: 13px 18px; border-radius: 14px; font-size: 0.91rem; line-height: 1.65; }
+  .msg.ai .msg-bubble { background: var(--surface); border: 1px solid var(--border); border-top-left-radius: 4px; }
+  .msg.user .msg-bubble { background: rgba(240,180,41,0.1); border: 1px solid rgba(240,180,41,0.2); border-top-right-radius: 4px; }
+  .msg-bubble b { color: #ffd166; }
+  .msg-bubble .teal { color: var(--teal); }
+  .msg-bubble ul { padding-left: 16px; margin: 8px 0; display: flex; flex-direction: column; gap: 4px; }
+  .msg-bubble li { font-size: 0.88rem; }
+  .msg-bubble .chip-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+  .msg-bubble .inline-chip { background: var(--surface2); border: 1px solid rgba(240,180,41,0.2); border-radius: 100px; padding: 4px 12px; font-size: 0.75rem; color: var(--gold); cursor: pointer; transition: background 0.2s; font-family: 'DM Sans', sans-serif; }
+  .msg-bubble .inline-chip:hover { background: rgba(240,180,41,0.1); }
+  .msg-time { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); margin-top: 5px; }
   .msg.user .msg-time { text-align: right; }
-
-  /* TYPING INDICATOR */
-  .typing-indicator .msg-bubble {
-    padding: 14px 18px;
-    display: flex; gap: 5px; align-items: center;
-  }
-  .typing-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--muted);
-    animation: typingBounce 1.2s infinite;
-  }
+  .typing-indicator .msg-bubble { display: flex; gap: 5px; align-items: center; }
+  .typing-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); animation: typingBounce 1.2s infinite; }
   .typing-dot:nth-child(2) { animation-delay: 0.2s; }
   .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes typingBounce {
-    0%,80%,100%{ transform: translateY(0); opacity:0.4; }
-    40%{ transform: translateY(-6px); opacity:1; }
-  }
-
-  /* INPUT */
-  .input-area {
-    flex-shrink: 0;
-    padding: 16px 0 24px;
-    border-top: 1px solid var(--border);
-  }
-  .input-row {
-    display: flex;
-    gap: 10px;
-    align-items: flex-end;
-  }
-  .input-box {
-    flex: 1;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 18px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.92rem;
-    resize: none;
-    outline: none;
-    min-height: 46px;
-    max-height: 120px;
-    line-height: 1.5;
-    transition: border-color 0.2s;
-  }
+  @keyframes typingBounce { 0%,80%,100%{transform:translateY(0);opacity:0.4} 40%{transform:translateY(-6px);opacity:1} }
+  .input-area { flex-shrink: 0; padding: 16px 0 24px; border-top: 1px solid var(--border); }
+  .input-row { display: flex; gap: 10px; align-items: flex-end; }
+  .input-box { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 18px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.92rem; resize: none; outline: none; min-height: 46px; max-height: 120px; line-height: 1.5; transition: border-color 0.2s; }
   .input-box:focus { border-color: rgba(240,180,41,0.4); }
   .input-box::placeholder { color: var(--muted); }
-  .send-btn {
-    width: 46px; height: 46px; flex-shrink: 0;
-    background: var(--gold);
-    border: none; border-radius: 10px;
-    cursor: pointer; color: #0a0e1a;
-    font-size: 1.1rem;
-    display: flex; align-items: center; justify-content: center;
-    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-  }
+  .send-btn { width: 46px; height: 46px; flex-shrink: 0; background: var(--gold); border: none; border-radius: 10px; cursor: pointer; color: #0a0e1a; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
   .send-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(240,180,41,0.3); }
-  .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
-  .input-hint { font-size: 0.72rem; color: var(--muted); margin-top: 8px; text-align: center; }
-  .input-hint strong { color: var(--teal); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .input-hint { font-size: 0.7rem; color: var(--muted); margin-top: 7px; text-align: center; }
+  .input-hint b { color: var(--teal); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 </style>
 </head>
 <body>
-
 <nav>
   <a href="index.html" class="nav-brand">AML with Vikas</a>
-  <div class="nav-status">
-    <div class="status-dot"></div>
-    <span>Vikas AI · Online</span>
-  </div>
+  <div class="nav-status"><div class="status-dot"></div><span>Vikas AI · Online</span></div>
   <a href="career-guide-roadmap.html" class="nav-back">Career Guide →</a>
 </nav>
-
 <div class="chat-container">
   <div class="messages" id="messages">
     <div class="welcome-card">
       <div class="ai-avatar">🎓</div>
       <h2>Ask <span>Vikas AI</span> — Your KYC/AML Mentor</h2>
-      <p>I'm your AI-powered compliance career guide. Ask me anything about KYC, AML, certifications, career paths, interview prep, or how to break into the industry.</p>
+      <p>I'm your compliance career guide. Ask me anything about KYC, AML, certifications, career paths, interview prep, or how to break into the industry.</p>
       <div class="suggestions">
         <button class="suggestion-chip" onclick="sendSuggestion(this)">What is CDD and EDD?</button>
         <button class="suggestion-chip" onclick="sendSuggestion(this)">Which certification should I start with?</button>
-        <button class="suggestion-chip" onclick="sendSuggestion(this)">How do I get a KYC job with no experience?</button>
-        <button class="suggestion-chip" onclick="sendSuggestion(this)">What does a SAR look like?</button>
-        <button class="suggestion-chip" onclick="sendSuggestion(this)">How long does CAMS take to study?</button>
+        <button class="suggestion-chip" onclick="sendSuggestion(this)">How to get a KYC job with no experience?</button>
+        <button class="suggestion-chip" onclick="sendSuggestion(this)">What is a SAR?</button>
+        <button class="suggestion-chip" onclick="sendSuggestion(this)">How long does CAMS take?</button>
         <button class="suggestion-chip" onclick="sendSuggestion(this)">What salary can I expect as a KYC Analyst?</button>
+        <button class="suggestion-chip" onclick="sendSuggestion(this)">What is PEP screening?</button>
+        <button class="suggestion-chip" onclick="sendSuggestion(this)">Tell me about FATF</button>
       </div>
     </div>
   </div>
-
   <div class="input-area">
     <div class="input-row">
-      <textarea
-        class="input-box"
-        id="userInput"
-        placeholder="Ask about KYC, AML, certifications, career advice..."
-        rows="1"
-        onkeydown="handleKey(event)"
-        oninput="autoResize(this)"
-      ></textarea>
+      <textarea class="input-box" id="userInput" placeholder="Ask about KYC, AML, certifications, career advice..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
       <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
     </div>
-    <div class="input-hint">Powered by <strong>Claude AI</strong> · Trained on KYC/AML career knowledge from <strong>AML with Vikas</strong></div>
+    <div class="input-hint">Powered by <b>Vikas AI</b> · Your dedicated KYC/AML career mentor</div>
   </div>
 </div>
-
 <script>
-const SYSTEM_PROMPT = `You are "Vikas AI", the friendly and expert KYC/AML career mentor from the AMLwithVikas education platform. Your role is to help students and graduates break into the KYC/AML compliance industry.
+const kb = [
+  { keys: ['cdd','edd','due diligence','customer due diligence','enhanced due diligence'], answer: `<b>CDD (Customer Due Diligence)</b> and <b>EDD (Enhanced Due Diligence)</b> are the foundation of KYC.<br><br><b>CDD</b> is the standard process applied to all customers — collecting and verifying identity information (name, DOB, address, ID documents) and understanding the nature of the business relationship.<br><br><b>EDD</b> is triggered for higher-risk customers — such as PEPs, high-net-worth individuals, or customers from high-risk jurisdictions. EDD goes deeper: source of funds, source of wealth, senior management approval, and more frequent reviews.<br><ul><li>CDD = standard onboarding verification</li><li>EDD = deeper investigation for high-risk customers</li><li>SDD (Simplified DD) = reduced checks for very low-risk customers</li></ul><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">What is KYC?</span><span class="inline-chip" onclick="sendSuggestion(this)">What is PEP screening?</span></div>` },
+  { keys: ['kyc','know your customer','what is kyc'], answer: `<b>KYC (Know Your Customer)</b> is the process financial institutions use to verify the identity of their clients and assess the risks of doing business with them.<br><br>It includes three main components:<br><ul><li><b>Customer Identification Program (CIP)</b> — collect and verify identity</li><li><b>Customer Due Diligence (CDD)</b> — understand the customer and their risk profile</li><li><b>Ongoing Monitoring</b> — continuously monitor transactions and update records</li></ul>KYC is legally required under anti-money laundering regulations in virtually every country. Every bank, fintech, and financial institution needs KYC professionals.<div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">What is CDD and EDD?</span><span class="inline-chip" onclick="sendSuggestion(this)">What is AML?</span></div>` },
+  { keys: ['aml','anti money laundering','what is aml','money laundering'], answer: `<b>AML (Anti-Money Laundering)</b> refers to the laws, regulations, and procedures designed to prevent criminals from disguising illegally obtained money as legitimate income.<br><br>Money laundering happens in 3 stages:<br><ul><li><b>Placement</b> — introducing illegal cash into the financial system</li><li><b>Layering</b> — disguising the trail through complex transactions</li><li><b>Integration</b> — reintroducing money as seemingly legitimate funds</li></ul>AML professionals detect and report suspicious activity using transaction monitoring systems, filing SARs with regulators, and investigating financial crime cases.<div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">What is a SAR?</span><span class="inline-chip" onclick="sendSuggestion(this)">Tell me about FATF</span></div>` },
+  { keys: ['sar','suspicious activity','suspicious activity report','str','suspicious transaction'], answer: `A <b>SAR (Suspicious Activity Report)</b> is a formal report filed with a Financial Intelligence Unit (FIU) when a financial institution suspects a customer is involved in money laundering, terrorism financing, or other financial crimes.<br><br><b>When is a SAR filed?</b><ul><li>Unusual transaction patterns with no clear business reason</li><li>Customer refuses to provide documentation</li><li>Transactions structured to avoid reporting thresholds</li><li>Transactions to/from high-risk jurisdictions</li></ul><b>Key rule:</b> Once a SAR is filed, you must NOT tip off the customer — this is a criminal offence in most jurisdictions.<div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">What is transaction monitoring?</span><span class="inline-chip" onclick="sendSuggestion(this)">What does an AML Analyst do?</span></div>` },
+  { keys: ['pep','politically exposed person','pep screening','sanctions','worldcheck','refinitiv'], answer: `<b>PEP (Politically Exposed Person)</b> refers to an individual who holds or has held a prominent public position — such as a government minister, senior official, judge, military officer, or their close family members and associates.<br><br>PEPs are considered higher-risk because their position may make them more susceptible to corruption. They automatically require <b>Enhanced Due Diligence (EDD)</b>.<br><br><b>Sanctions Screening</b> checks customers against government sanctions lists:<ul><li><b>OFAC</b> (US Treasury — SDN list)</li><li><b>UN Security Council</b> sanctions list</li><li><b>EU Consolidated List</b></li><li><b>UK HM Treasury</b> sanctions list</li></ul><b>Tools:</b> WorldCheck (Refinitiv), Dow Jones, LexisNexis, Comply Advantage.<div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">What roles can I start with?</span><span class="inline-chip" onclick="sendSuggestion(this)">What is CDD and EDD?</span></div>` },
+  { keys: ['cams','certification','certificate','which cert','best cert','ica','acams','cgss','start with'], answer: `<b>Vikas's recommended certification path:</b><br><br><b>🟢 Start Here (Beginner)</b><ul><li><b>ACAMS Foundations Certificate</b> — ~$395, 1–2 months, self-paced</li><li><b>ICA Certificate in KYC</b> — ~$800, 3–4 months, globally recognised</li></ul><b>🟡 Level Up (Intermediate)</b><ul><li><b>CAMS</b> — the global gold standard. ~$1,495, 4–6 months. Opens doors at top banks.</li><li><b>ICA Diploma in Compliance</b> — ~$3,500, 9–12 months</li></ul><b>🔴 Specialist (Advanced)</b><ul><li><b>CGSS</b> — Certified Global Sanctions Specialist (~$1,195)</li><li><b>CAMS-RM</b> — Risk Management specialty (requires CAMS first)</li></ul><span class="teal">Tip: Start ACAMS Foundations → study for CAMS while job searching.</span><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">How long does CAMS take?</span><span class="inline-chip" onclick="sendSuggestion(this)">How to get a KYC job with no experience?</span></div>` },
+  { keys: ['how long cams','cams study','cams exam','cams time'], answer: `<b>CAMS study timeline:</b> Most candidates take <b>4–6 months</b> studying 1–2 hours per day.<br><br><ul><li><b>Format:</b> 120 multiple-choice questions, 3.5 hours</li><li><b>Pass mark:</b> ~75% correct answers</li><li><b>Study materials:</b> Official ACAMS Study Guide (included in fee)</li><li><b>Renewal:</b> Every 3 years (60 CAMS credits)</li></ul><b>Vikas's study tips:</b><ul><li>Study FATF 40 Recommendations thoroughly — heavily tested</li><li>Understand the 3 stages of money laundering deeply</li><li>Focus on SAR requirements and tipping-off offences</li><li>Know CDD vs EDD vs SDD differences</li></ul><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">Which certification should I start with?</span><span class="inline-chip" onclick="sendSuggestion(this)">Tell me about FATF</span></div>` },
+  { keys: ['fatf','financial action task force','40 recommendations','fatf recommendations'], answer: `<b>FATF (Financial Action Task Force)</b> is the global standard-setter for AML/CTF, founded in 1989 with 39 members.<br><br><b>The FATF 40 Recommendations cover:</b><ul><li>Customer Due Diligence and record keeping</li><li>Reporting of suspicious transactions</li><li>Regulation of designated non-financial businesses</li><li>International cooperation and information sharing</li><li>Beneficial ownership transparency</li></ul><b>FATF Lists:</b><ul><li><b>Grey List</b> — countries under increased monitoring</li><li><b>Black List</b> — countries with severe AML deficiencies (e.g. North Korea, Iran)</li></ul><span class="teal">FATF knowledge is essential for CAMS — expect 15–20% of questions from this topic.</span><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">How long does CAMS take?</span><span class="inline-chip" onclick="sendSuggestion(this)">What is AML?</span></div>` },
+  { keys: ['transaction monitoring','monitoring','alerts','tm'], answer: `<b>Transaction Monitoring (TM)</b> is the automated process of analysing customer transactions to detect unusual patterns that may indicate financial crime.<br><br><b>How it works:</b><ul><li>Rules and algorithms flag transactions that breach thresholds</li><li>Alerts are sent to AML Analysts to review</li><li>Analysts investigate: close (false positive) or escalate to SAR filing</li></ul><b>Common red flags:</b><ul><li>Structuring — multiple transactions just below reporting thresholds</li><li>Rapid movement of funds across accounts</li><li>Unusual cash activity inconsistent with customer profile</li><li>Transactions to/from sanctioned countries</li></ul><b>Popular tools:</b> NICE Actimize, Oracle FCCM, SAS AML.<div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">What is a SAR?</span><span class="inline-chip" onclick="sendSuggestion(this)">What does an AML Analyst do?</span></div>` },
+  { keys: ['no experience','fresher','fresh graduate','first job','entry level','break in','how to get','get into kyc','get a job'], answer: `<b>Breaking into KYC/AML with zero experience — Vikas's proven path:</b><br><br><b>Step 1 — Get certified (months 1–3)</b><ul><li>Enrol in ACAMS Foundations or ICA Certificate in KYC</li><li>This adds credibility before your first job</li></ul><b>Step 2 — Build a portfolio (months 3–5)</b><ul><li>Write 2–3 sample SARs using public templates</li><li>Complete simulated KYC case studies</li></ul><b>Step 3 — Target the right employers</b><ul><li>BPO/outsourcing firms hire freshers constantly (HSBC KYC ops, Synechron, Accenture)</li><li>Fintech startups — lower bar for entry, faster growth</li></ul><b>Step 4 — LinkedIn optimisation</b><ul><li>Headline: "KYC Analyst | ACAMS Certified | AML Compliance"</li><li>Hashtags: #KYC #AML #Compliance #FinancialCrime</li></ul><span class="teal">Most Vikas students land their first role within 6–8 months.</span><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">What roles can I start with?</span><span class="inline-chip" onclick="sendSuggestion(this)">What salary can I expect as a KYC Analyst?</span></div>` },
+  { keys: ['salary','pay','earning','how much','compensation','package','income'], answer: `<b>KYC/AML Salary Benchmarks (USD/year):</b><br><ul><li><b>Screening Analyst</b> (entry) — $42,000 – $55,000</li><li><b>KYC Analyst</b> (entry) — $45,000 – $62,000</li><li><b>AML Analyst</b> — $50,000 – $75,000</li><li><b>Compliance Associate</b> — $48,000 – $68,000</li><li><b>Senior AML Analyst / Team Lead</b> — $75,000 – $110,000</li><li><b>Compliance Manager</b> — $95,000 – $135,000</li><li><b>Head of Compliance</b> — $120,000 – $160,000+</li></ul><b>India:</b> Entry ₹4–8 LPA, Senior ₹15–35 LPA at global banks.<br><b>UAE:</b> Entry $40k–$60k tax-free, Senior $100k+.<br><br><span class="teal">Getting CAMS certified typically adds 15–25% to salary at every level.</span><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">How fast can I get promoted?</span><span class="inline-chip" onclick="sendSuggestion(this)">Which certification should I start with?</span></div>` },
+  { keys: ['roles','which role','start role','job role','aml analyst','kyc analyst','screening analyst','compliance associate','what does','analyst do'], answer: `<b>The 4 best entry-level KYC/AML roles:</b><br><br><b>🔍 KYC Analyst</b> — Most common entry role. Review customer documents, build due diligence files. Best for detail-oriented candidates. ($45k–$62k)<br><br><b>🌐 Screening Analyst</b> — Easiest to enter with any degree. Screen customers against PEP/sanctions databases. ($42k–$55k)<br><br><b>📊 AML Analyst</b> — Investigate transaction alerts, write SARs. Best for analytical thinkers. ($50k–$65k)<br><br><b>🛡️ Compliance Associate</b> — Policy work, regulatory updates, internal audit support. Great for law graduates. ($48k–$62k)<br><br><span class="teal">Not sure which fits you? Take the Career Quiz on the homepage for a personalised recommendation!</span><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">How to get a KYC job with no experience?</span><span class="inline-chip" onclick="sendSuggestion(this)">What salary can I expect as a KYC Analyst?</span></div>` },
+  { keys: ['promote','promotion','career growth','career path','grow','progression','how fast','senior','manager','leadership'], answer: `<b>Typical KYC/AML Career Progression:</b><ul><li><b>Year 0–1:</b> KYC / Screening / AML Analyst (entry)</li><li><b>Year 2–3:</b> Senior Analyst or AML Specialist (with CAMS)</li><li><b>Year 3–5:</b> Team Lead or Deputy Manager</li><li><b>Year 5–8:</b> Compliance Manager / Head of KYC</li><li><b>Year 8+:</b> Head of Compliance / Chief Compliance Officer</li></ul><b>What accelerates promotion:</b><ul><li>Getting CAMS certified — required for senior roles</li><li>Moving from BPO to a direct bank (30–50% salary jump)</li><li>Specialising in sanctions, FinCrime, or RegTech</li></ul><span class="teal">Vikas's students regularly move from analyst to team lead in just 3 years.</span><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">Which certification should I start with?</span><span class="inline-chip" onclick="sendSuggestion(this)">What salary can I expect as a KYC Analyst?</span></div>` },
+  { keys: ['interview','interview prep','interview question','common question','prepare'], answer: `<b>Top KYC/AML Interview Questions + How to Answer:</b><br><br><b>1. What is KYC and why is it important?</b><br>Explain CIP, CDD, ongoing monitoring. Mention regulatory obligation and financial crime prevention.<br><br><b>2. Difference between CDD and EDD?</b><br>CDD = standard verification. EDD = deeper checks for high-risk customers like PEPs.<br><br><b>3. The 3 stages of money laundering?</b><br>Placement → Layering → Integration.<br><br><b>4. Customer refuses to provide documents?</b><br>Escalate to senior management, consider filing a SAR, never tip off the customer.<br><br><b>5. What tools have you used for screening?</b><br>Mention WorldCheck, Comply Advantage, or Dow Jones — even if only studied.<br><br><b>6. What would trigger a SAR filing?</b><br>Structuring, unusual patterns, transactions to sanctioned countries.<br><br><span class="teal">Use STAR method (Situation → Task → Action → Result) for behavioural questions.</span><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">What is CDD and EDD?</span><span class="inline-chip" onclick="sendSuggestion(this)">What is a SAR?</span></div>` },
+  { keys: ['remote','work from home','hybrid','wfh'], answer: `<b>Remote Work in KYC/AML:</b><br><br>Yes — compliance is one of the most remote-friendly professional fields!<br><br><b>Commonly done remotely:</b><ul><li>KYC Analyst (document review, data entry)</li><li>Screening Analyst (database checks)</li><li>AML Analyst (alert review, SAR writing)</li></ul><b>Best remote employers:</b><ul><li>Fintech companies (Revolut, Monzo, Wise, Coinbase)</li><li>KYC utilities and BPO outsourcing firms</li></ul><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">What roles can I start with?</span><span class="inline-chip" onclick="sendSuggestion(this)">How to get a KYC job with no experience?</span></div>` },
+  { keys: ['coding','code','technical','software','excel','tools','technology'], answer: `<b>Do you need coding for KYC/AML?</b><br><br><span class="teal"><b>No coding required</b></span> for the vast majority of KYC/AML roles.<br><br><b>Tools you WILL use:</b><ul><li><b>Microsoft Excel / Google Sheets</b> — basic formulas, data organisation (essential)</li><li><b>Screening tools</b> — WorldCheck, Refinitiv, LexisNexis (trained on the job)</li><li><b>Case management systems</b> — NICE Actimize, Oracle FCCM (trained on the job)</li></ul><b>Optional (not required):</b><ul><li>Basic SQL for querying compliance databases (mid-senior level)</li><li>Power BI / Tableau for reporting dashboards</li></ul><span class="teal">If you can use Excel and write clearly — you have the technical skills needed to start.</span><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">How to get a KYC job with no experience?</span></div>` },
+  { keys: ['arts','humanities','non finance','not commerce','engineering','law','any degree','background','stream'], answer: `<b>Can non-finance graduates get into KYC/AML?</b><br><br><span class="teal"><b>Absolutely — and they often excel!</b></span><br><br><ul><li><b>Law / Political Science</b> → Compliance Associate, Regulatory Reporting</li><li><b>Arts / Humanities</b> → Screening Analyst, KYC Analyst</li><li><b>Engineering / Science</b> → AML Analyst, Transaction Monitoring</li><li><b>Commerce / Finance</b> → All roles, especially AML and Investigations</li></ul><b>What employers actually want:</b><ul><li>Attention to detail</li><li>Analytical thinking</li><li>Clear written communication</li><li>Ethical judgement</li></ul><span class="teal">Vikas has mentored students from every background into successful compliance careers.</span><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">Which certification should I start with?</span><span class="inline-chip" onclick="sendSuggestion(this)">How to get a KYC job with no experience?</span></div>` },
+  { keys: ['linkedin','resume','cv','profile','network','job search','apply'], answer: `<b>LinkedIn & Resume Tips for KYC/AML Students:</b><br><br><b>LinkedIn Headline:</b><br>"KYC/AML Analyst | ACAMS Certified | Financial Crime Compliance"<br><br><b>Profile tips:</b><ul><li>Keywords: KYC, AML, CDD, EDD, SAR, Sanctions, CAMS, FATF</li><li>Add certifications to Licenses & Certifications immediately</li><li>Follow ACAMS, ICA, and compliance thought leaders</li></ul><b>Resume tips:</b><ul><li>Action verbs: "Conducted CDD/EDD reviews", "Screened customers against PEP/sanctions databases"</li><li>Keep to 1 page for entry-level</li><li>Certifications prominently displayed at the top</li></ul><b>Where to apply:</b> LinkedIn Jobs, Indeed, ACAMS Job Board, ICA Jobs.<div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">How to get a KYC job with no experience?</span><span class="inline-chip" onclick="sendSuggestion(this)">Interview tips?</span></div>` }
+];
 
-Your personality:
-- Warm, encouraging, and practical
-- Expert in KYC/AML compliance careers
-- You reference the AMLwithVikas program when relevant
-- You use the hashtag #AMLwithVikas occasionally
-- Keep answers concise but complete — 3-5 paragraphs max
-
-Your knowledge base includes:
-- KYC (Know Your Customer): CDD, EDD, UBO, document verification, onboarding
-- AML (Anti-Money Laundering): Transaction monitoring, SAR/STR writing, typologies, FinCrime investigation
-- Sanctions & Screening: PEP screening, WorldCheck, Refinitiv, OFAC, UN sanctions
-- Certifications: CAMS (gold standard), ICA Certificate/Diploma, ACAMS Foundations, CGSS, CAMS-RM
-- Regulations: FATF 40 Recommendations, EU AMLD 5th/6th, US BSA, FinCEN, UK MLR 2017
-- Career paths: KYC Analyst → Senior → Manager | AML Analyst → Specialist → FinCrime Investigator | Compliance Associate → Officer → Head of Compliance
-- Salary ranges: Entry level $42k–$65k, Mid $65k–$90k, Senior $90k–$130k+, Head of Compliance $110k–$160k+
-- Job search: Resume tips, LinkedIn optimization, interview prep, networking
-
-For interview questions, provide clear model answers using the STAR method.
-For technical questions, explain clearly with real-world examples.
-Always be encouraging — many students come from non-finance backgrounds and need confidence.
-Format responses with light markdown: **bold** for key terms, bullet points where helpful.`;
-
-let conversationHistory = [];
-let isLoading = false;
-
-function getTime() {
-  return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
-
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-}
-
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
+function findAnswer(query) {
+  const q = query.toLowerCase().trim();
+  if (q === 'interview tips?') return findAnswer('interview preparation');
+  if (q === 'how fast can i get promoted?') return findAnswer('career growth');
+  if (q === 'what does an aml analyst do?') return findAnswer('aml analyst roles');
+  let best = null, bestScore = 0;
+  for (const entry of kb) {
+    let score = 0;
+    for (const key of entry.keys) { if (q.includes(key)) score += key.length; }
+    if (score > bestScore) { bestScore = score; best = entry; }
   }
+  if (best && bestScore > 0) return best.answer;
+  if (q.match(/^(hello|hi|hey|hiya)/)) return `Hello! 👋 I'm Vikas AI, your KYC/AML career mentor. Ask me about KYC, AML, certifications, salaries, interview prep, or how to break into the industry!<div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">Which certification should I start with?</span><span class="inline-chip" onclick="sendSuggestion(this)">How to get a KYC job with no experience?</span></div>`;
+  if (q.match(/thank|thanks|great|helpful/)) return `You're very welcome! 🎓 Keep going — you're on the right path. <b>#AMLwithVikas</b><div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">Which certification should I start with?</span></div>`;
+  return `That's a great question! Here are some topics I can help with:<div class="chip-row"><span class="inline-chip" onclick="sendSuggestion(this)">What is CDD and EDD?</span><span class="inline-chip" onclick="sendSuggestion(this)">Which certification should I start with?</span><span class="inline-chip" onclick="sendSuggestion(this)">How to get a KYC job with no experience?</span><span class="inline-chip" onclick="sendSuggestion(this)">What is a SAR?</span><span class="inline-chip" onclick="sendSuggestion(this)">What salary can I expect as a KYC Analyst?</span></div>`;
 }
 
-function sendSuggestion(btn) {
-  document.getElementById('userInput').value = btn.textContent;
-  sendMessage();
-}
+let isTyping = false;
+function getTime() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
+function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 120) + 'px'; }
+function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
+function scrollToBottom() { const m = document.getElementById('messages'); m.scrollTop = m.scrollHeight; }
+function sendSuggestion(btn) { document.getElementById('userInput').value = btn.textContent; sendMessage(); }
 
-function scrollToBottom() {
-  const msgs = document.getElementById('messages');
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function addMessage(role, content) {
-  const msgs = document.getElementById('messages');
-  const div = document.createElement('div');
-  div.className = `msg ${role}`;
-
-  const avatar = document.createElement('div');
-  avatar.className = `msg-avatar ${role === 'ai' ? 'ai' : 'user-av'}`;
-  avatar.textContent = role === 'ai' ? '🎓' : 'You';
-
-  const bubble = document.createElement('div');
-  bubble.className = 'msg-bubble';
-  bubble.innerHTML = formatMessage(content);
-
-  const time = document.createElement('div');
-  time.className = 'msg-time';
-  time.textContent = getTime();
-
-  const inner = document.createElement('div');
-  inner.style.maxWidth = '80%';
-  inner.appendChild(bubble);
-  inner.appendChild(time);
-
-  div.appendChild(avatar);
-  div.appendChild(inner);
-  msgs.appendChild(div);
-  scrollToBottom();
-  return div;
-}
-
-function formatMessage(text) {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/^/, '<p>').replace(/$/, '</p>');
-}
-
-function addTypingIndicator() {
-  const msgs = document.getElementById('messages');
-  const div = document.createElement('div');
-  div.className = 'msg ai';
-  div.id = 'typingIndicator';
-
-  const avatar = document.createElement('div');
-  avatar.className = 'msg-avatar ai';
-  avatar.textContent = '🎓';
-
-  const bubble = document.createElement('div');
-  bubble.className = 'msg-bubble typing-indicator';
-  bubble.innerHTML = '<div class="msg-bubble" style="padding:14px 18px;display:flex;gap:5px;align-items:center;"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
-
-  div.appendChild(avatar);
-  div.appendChild(bubble);
-  msgs.appendChild(div);
-  scrollToBottom();
-}
-
-function removeTypingIndicator() {
-  const el = document.getElementById('typingIndicator');
-  if (el) el.remove();
-}
-
-async function sendMessage() {
+function sendMessage() {
+  if (isTyping) return;
   const input = document.getElementById('userInput');
   const text = input.value.trim();
-  if (!text || isLoading) return;
-
-  input.value = '';
-  input.style.height = 'auto';
-  isLoading = true;
-  document.getElementById('sendBtn').disabled = true;
-
-  addMessage('user', text);
-  conversationHistory.push({ role: 'user', content: text });
-
-  addTypingIndicator();
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: SYSTEM_PROMPT,
-        messages: conversationHistory
-      })
-    });
-
-    const data = await response.json();
-    removeTypingIndicator();
-
-    const reply = data.content?.map(b => b.text || '').join('') || 'Sorry, I had trouble responding. Please try again!';
-    conversationHistory.push({ role: 'assistant', content: reply });
-    addMessage('ai', reply);
-
-  } catch (err) {
-    removeTypingIndicator();
-    addMessage('ai', 'I had a connection issue. Please check your internet and try again!');
-    console.error(err);
-  }
-
-  isLoading = false;
-  document.getElementById('sendBtn').disabled = false;
-  input.focus();
+  if (!text) return;
+  input.value = ''; input.style.height = 'auto';
+  isTyping = true; document.getElementById('sendBtn').disabled = true;
+  const msgs = document.getElementById('messages');
+  // User bubble
+  const udiv = document.createElement('div'); udiv.className = 'msg user';
+  udiv.innerHTML = `<div class="msg-avatar user-av">You</div><div class="msg-inner"><div class="msg-bubble">${text.replace(/</g,'&lt;')}</div><div class="msg-time">${getTime()}</div></div>`;
+  msgs.appendChild(udiv); scrollToBottom();
+  // Typing
+  const tdiv = document.createElement('div'); tdiv.className = 'msg ai'; tdiv.id = 'typing';
+  tdiv.innerHTML = `<div class="msg-avatar ai">🎓</div><div class="msg-inner"><div class="msg-bubble typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  msgs.appendChild(tdiv); scrollToBottom();
+  setTimeout(() => {
+    tdiv.remove();
+    const answer = findAnswer(text);
+    const adiv = document.createElement('div'); adiv.className = 'msg ai';
+    adiv.innerHTML = `<div class="msg-avatar ai">🎓</div><div class="msg-inner"><div class="msg-bubble">${answer}</div><div class="msg-time">Vikas AI · ${getTime()}</div></div>`;
+    msgs.appendChild(adiv);
+    adiv.querySelectorAll('.inline-chip').forEach(c => { c.onclick = () => sendSuggestion(c); });
+    scrollToBottom();
+    isTyping = false; document.getElementById('sendBtn').disabled = false;
+    document.getElementById('userInput').focus();
+  }, 600 + Math.random() * 600);
 }
 </script>
 </body>
